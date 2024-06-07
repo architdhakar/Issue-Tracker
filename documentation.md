@@ -44,6 +44,13 @@ require is used to get the specific modules
 8. Now under that client, connect to the database and collection in which you want to store the data.
 9. Now insert the data using InsertOne to add one data. If you have multiple such data you can simply use InsertMany.
 
+# Authenticating from database for user login.
+1. In login.html we input required credentials of user.
+2. In server.js, we fetch the credentials as input on page.
+3. We generate hash value to match with the password.
+4. We connect to our database and find the query with input username or roll number.
+5. If user is found, we match the hash values of input password and stored password to authenticate. If matched, redirect to success.html
+6. If user not found, throw error.
 
 
 
