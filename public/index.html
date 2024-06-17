@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Issue Tracker</title>
 </head>
 
@@ -33,10 +33,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mx-3 ">
                 <li class="nav-item mx-2 active">
-                    <a class="nav-link text-white" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link text-white" href="#">Login</a>
+                    <a class="nav-link text-white" href="login.html">Login</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -44,9 +44,12 @@
                         Registration
                     </a>
                     <div class="dropdown-menu bg-mycolor" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item text-dark" href="/public/signup.html">User</a>
-                        <a class="dropdown-item text-dark" href="/public/signup.html">Employee</a>
+                        <a class="dropdown-item text-dark" href="signup.html">User</a>
+                        <a class="dropdown-item text-dark" href="signup.html">Employee</a>
                     </div>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-white" href="faq.html">Faq</a>
                 </li>
             </ul>
         </div>
@@ -67,7 +70,7 @@
                         <h5 class="text-dark mb-0">Fill Your Query</h5>
                     </div>
                     <div class="card-body">
-                        <form id="issue-form" action="submit_issue.php" method="post">
+                        <form id="issue-form" action="/query" method="post">
                             <div class="mb-2">
                                 <label for="queryType" class="form-label">Query Type:</label>
                                 <select class="form-control form-control-sm text-dark" id="queryType" name="queryType" required>
@@ -84,14 +87,14 @@
                             </div>
                             <div class="mb-2">
                                 <label for="queryType" class="form-label">Branch:</label>
-                                <select class="form-control form-control-sm text-dark" id="queryType" name="queryType" required>
+                                <select class="form-control form-control-sm text-dark" id="branchType" name="branchType" required>
                                     <option value="">Select your branch</option>
-                                    <option value="tech">CSE</option>
-                                    <option value="network">Mechanical Engi.</option>
-                                    <option value="storage">EE</option>
-                                    <option value="storage">Chemical Engi.</option>
-                                    <option value="storage">Civil</option>
-                                    <option value="storage">Materials Engi.</option>
+                                    <option value="CSE">CSE</option>
+                                    <option value="Mechanical">Mechanical Engi.</option>
+                                    <option value="Electrical">EE</option>
+                                    <option value="Chemical">Chemical Engi.</option>
+                                    <option value="Civil">Civil</option>
+                                    <option value="Materials">Materials Engi.</option>
                                 </select>
                             </div>
                             <div class="mb-2">
