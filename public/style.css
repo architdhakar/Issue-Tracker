@@ -41,4 +41,36 @@ body{
     font-size: 0.875rem; /* Smaller font size for button */
 }
 
+/* Data base Table*/
+th, td {
+    border: 2px solid #010101;
+    
+}
+table button.primary {
+    background-color: rgb(0, 255, 94);
+    color: rgb(7, 7, 7);
+}
 
+
+/*Faq Box*/
+.faq-box {
+    background-color: #e6e5e5;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.faq-box .answer {
+    color: crimson;
+    display: none;
+    margin-top: 10px;
+}
+.faq-box .question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.faq-box .question .toggle-icon {
+    font-size: 24px;
+    font-weight: bold;
+}
