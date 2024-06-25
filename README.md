@@ -45,18 +45,18 @@ To set up the Issue Tracker on your local machine, follow these steps:
    Create a `.env` file in the root directory and add your MongoDB connection string and other necessary environment variables.
 
    ```bash
-   MONGO_URI=your_mongodb_connection_string
+   MONGO_URL=your_mongodb_connection_string
    ```
 
 5. **Start the Application**
 
    ```bash
-   npm start
+   node server.js
    ```
 
 6. **Access the Application**
 
-   Open your browser and navigate to `http://localhost:3000`.
+   Open your browser and navigate to `http://localhost:4000`.
 
 ## Features
 
@@ -87,6 +87,4 @@ To set up the Issue Tracker on your local machine, follow these steps:
 - **Aryan Sahu**
 - **Archit Dhakar**
 
----
 
-This should make your README file look more professional and provide clear instructions for setting up the project on a local machine.
