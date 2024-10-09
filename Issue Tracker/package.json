@@ -1,0 +1,15 @@
+{
+  "name": "issue-tracker",
+  "version": "1.0.0",
+  "description": "Issue tracker portal ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Archit & Aryan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongodb": "^6.7.0"
+  }
+}

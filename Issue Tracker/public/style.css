@@ -1,0 +1,173 @@
+/* General Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h5 {
+    color: #ffffff;
+}
+
+p {
+    color: #f0f0f0;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #001f3f;
+    padding: 0.8rem 1.5rem;
+    
+}
+
+.navbar-brand img {
+    border-radius: 50%;
+}
+
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #da2048;
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar-toggler-icon {
+    color: #ffffff;
+}
+
+
+/* Dropdown arrow style */
+.nav-link.dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+
+/* Remove default button appearance */
+.nav-link.dropdown-toggle {
+    cursor: pointer;
+}
+
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-link.dropdown-toggle::after {
+    display: none;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Card Styles */
+.card {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    background-color: #f0f0f0;
+    border-bottom: 2px solid #daa520;
+    color: #333333;
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 0.3rem;
+}
+
+.form-label{
+    color: #001f3f;
+}
+
+
+/* Footer Styles */
+footer {
+    background-color: #001f3f;
+    color: #f0f0f0;
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+
+/* Data base Table*/
+th, td {
+    font-weight: 400;
+    border: 2px solid #010101;
+    
+}
+tbody{
+    font-weight: 400;
+    color: #f5f1f2;
+}
+table button.primary {
+    background-color: rgb(0, 255, 94);
+    color: rgb(7, 7, 7);
+}
+
+
+/*Faq Box*/
+.faq-box {
+    background-color: #eedddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.faq-box .answer{
+    color: rgb(56, 5, 22);
+    display: none;
+    margin-top: 10px;
+}
+.faq-box .question {
+    color: #010101;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.faq-box .question .toggle-icon {
+    font-size: 24px;
+    font-weight: bold;
+}

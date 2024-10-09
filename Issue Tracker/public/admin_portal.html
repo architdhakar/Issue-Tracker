@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Query Tracker</title>
+</head>
+
+<body>
+    <!--Navbar start-->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <a class="navbar-brand text-white" href="#">
+            <img src="IIT_Gandhinagar_Logo.svg.png" width="30" height="30"
+                class="d-inline-block align-top bg-white  mx-2" alt="">
+            Student Academic Council
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mx-3 ">
+                <li class="nav-item mx-2 active">
+                    <a class="nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-white" href="login.html">Login</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Registration
+                    </a>
+                    <div class="dropdown-menu bg-mycolor" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-dark" href="signup.html">User</a>
+                        <a class="dropdown-item text-dark" href="signup.html">Employee</a>
+                    </div>
+                </li>
+
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-white" href="faq.html">Faq</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--Navbar end-->
+
+    <!--Heading start-->
+    <div class="container my-4">
+        <h1 class="text-center" style="color:#fefefe;"><span style="font-size: 1.9rem;margin-right:3px;">ADMIN</span>
+            <span style="font-size: 1.9rem;">PORTAL</span>
+        </h1>
+    </div>
+    <!--Heading end-->
+    <!--Filter start-->
+    <div class="container">
+        <h5>Filters:</h5>
+        <div class="row">
+            <div class="col-md-1">
+                <select class="my-1" style="border:2px solid rgb(4, 14, 74);" id="queryTypeFilter"
+                    onchange="filterQueries()">
+                    <option value="all">Query type</option>
+                    <option value="tech">Tech</option>
+                    <option value="network">Network</option>
+                    <option value="storage">Storage</option>
+                </select>
+
+            </div>
+            <div class="col-md-2 mx-4">
+                <select class="my-1" style="border:2px solid rgb(4, 14, 74);" id="branchTypeFilter"
+                    onchange="filterQueries()">
+                    <option value="all">Branch type</option>
+                    <option value="CSE">CSE</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Chemical">Chemical</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Materials">Materials</option>
+                </select>
+            </div>
+
+        </div>
+
+    </div>
+    <!--filter ends-->
+    <!--Main Content Table starts-->
+    <div class="container">
+        <table id="dataTable" class="table table-bordered table-hover table-responsive-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">S.NO</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">BRANCH</th>
+                    <th scope="col">QUERY TYPE</th>
+                    <th scope="col">QUERY</th>
+                    <th scope="col">RESOLVED STATUS</th>
+                    <th scope="col">RESOLVED BY</th>
+                    <th scope="col">ACTIONS</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+        </table>
+    </div>
+    <!--Main Content Table end-->
+
+    <!--We are keeping a index which updates it's value to one when the query is fetched-->
+    <script>
+        fetch('http://localhost:4000/admin_data')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('#dataTable tbody');
+                data.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>   
+                        <td>${item.Name}</td>
+                        <td>${item.Email}</td>
+                        <td>${item.Branch}</td>
+                        <td>${item.QueryType}</td>
+                        <td>${item.Query}</td>
+                        <td id="status-${index}">${item.resolvedStatus}</td>
+                        <td id="resolvedBy-${index}">${item.resolvedBy}</td>
+                        <td><button id="resolveBtn-${index}" onclick="resolveQuery('${item._id}', ${index})">Resolve</button></td>
+                    `;
+                    tableBody.appendChild(row);   // This is used to append the above data in the row
+
+                    // Set button color if already resolved
+                    if (item.resolvedStatus === 'Resolved') {
+                        const resolveBtn = document.getElementById(`resolveBtn-${index}`);
+                        resolveBtn.classList.add('primary');
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        // This is to update the status of query
+        function resolveQuery(id, index) {
+            const resolver = prompt('Please enter your name:');  // We are taking a promt in which we take the name of admin who has resolved the query
+            if (!resolver) {
+                alert('Resolver name is required!');
+                return;
+            }
+
+            fetch('http://localhost:4000/resolve_query', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: id, resolver: resolver })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        const statusCell = document.getElementById(`status-${index}`);
+                        const resolvedByCell = document.getElementById(`resolvedBy-${index}`);
+                        const resolveBtn = document.getElementById(`resolveBtn-${index}`);
+                        statusCell.textContent = 'Resolved';
+                        resolvedByCell.textContent = resolver;
+                        resolveBtn.classList.add('primary');
+                        resolveBtn.textContent = 'Resolved';
+                        resolveBtn.disabled = true;  // Optional: Disable the button after resolving
+                    } else {
+                        console.error('Error resolving query:', response.statusText);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+    <!--Function to filterout the queries-->
+    <script>
+        // This function filters queries based on the selected type and branch
+        function filterQueries() {
+            const queryType = document.getElementById('queryTypeFilter').value;
+            const branchType = document.getElementById('branchTypeFilter').value;
+
+            fetch('http://localhost:4000/filter-queries', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ type: queryType, branch: branchType })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the UI with the filtered data
+                displayQueries(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // This function displays the queries in the table
+        function displayQueries(queries) {
+            const tableBody = document.querySelector('#dataTable tbody');
+            tableBody.innerHTML = '';
+
+            queries.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.Name}</td>
+                    <td>${item.Email}</td>
+                    <td>${item.Branch}</td>
+                    <td>${item.QueryType}</td>
+                    <td>${item.Query}</td>
+                    <td id="status-${index}">${item.resolvedStatus}</td>
+                    <td id="resolvedBy-${index}">${item.resolvedBy}</td>
+                    <td><button id="resolveBtn-${index}" onclick="resolveQuery('${item._id}', ${index})">Resolve</button></td>
+                `;
+                tableBody.appendChild(row);
+
+                // Set button color if already resolved
+                if (item.resolvedStatus === 'Resolved') {
+                    const resolveBtn = document.getElementById(`resolveBtn-${index}`);
+                    resolveBtn.classList.add('primary');
+                }
+            });
+        }
+    </script>
+
+    <!--Footer start-->
+    <footer>
+        <p>© 2024 Student Academic Council IIT Gandhinagar. All rights reserved.</p>
+    </footer>
+    <!--Footer end-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
