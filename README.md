@@ -84,7 +84,6 @@ To set up the Issue Tracker on your local machine, follow these steps:
 
 ## Authors
 
-- **Aryan Sahu**
 - **Archit Dhakar**
 
 
